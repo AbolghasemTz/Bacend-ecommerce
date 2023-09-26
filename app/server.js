@@ -28,13 +28,15 @@ class Application {
   }
   connectToDB() {
     mongoose
-      .connect(this.#DB_URI, {
+      .connect(process.env.APP_DB, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
+      
       })
       .then((res) => console.log("MongoDB connected!!"))
       .catch((err) => console.log("Failed to connect to MongoDB", err));
   }
+  
   configServer() {
     this.#app.use(
       cors({ credentials: true, origin: process.env.ALLOW_CORS_ORIGIN })
